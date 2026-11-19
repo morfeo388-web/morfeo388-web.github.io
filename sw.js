@@ -1,4 +1,4 @@
-const CACHE = 'supermass-control-v6';
+const CACHE = 'supermass-control-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -15,7 +15,7 @@ const ASSETS = [
   './caducidades.js',
   './settings.js',
   './app.js',
-  './vendor/html5-qrcode.min.js',
+  './html5-qrcode.min.js',
   './manifest.webmanifest',
   './icon.svg'
 ];
