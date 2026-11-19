@@ -2,7 +2,7 @@
 
 /* ---------- Constants and icons ---------- */
 const DB_KEY = 'supermass_control_v1';
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.1.0';
 const UNITS = ['pza', 'kg', 'g', 'L', 'ml', 'caja', 'bolsa', 'paquete', 'charola', 'reja'];
 const DAY = 86400000;
 
@@ -156,6 +156,11 @@ function parseISO(s) {
 function fmtDate(s) {
   const d = parseISO(s);
   return d ? `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}` : '—';
+}
+
+function fmtDateShort(s) {
+  const d = parseISO(s);
+  return d ? `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getFullYear()).slice(-2)}` : '—';
 }
 
 function fmtDateTime(iso) {

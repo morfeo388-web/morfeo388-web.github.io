@@ -26,7 +26,7 @@ function renderRoute() {
   if (!isEditorRoute) editor = null;
   if (section !== 'recepcion') rec = null;
 
-  const titles = { inicio: 'Inicio', facturas: 'Facturas', recepciones: 'Recepción', caducidades: 'Caducidades', ajustes: 'Ajustes' };
+  const titles = { inicio: 'Inicio', facturas: 'Facturas', factura: 'Factura', recepciones: 'Recepción', recepcion: 'Recepción', caducidades: 'Caducidades', ajustes: 'Ajustes' };
 
   if (section === 'inicio') {
     renderDashboard();
@@ -45,7 +45,7 @@ function renderRoute() {
     } else if (parts[1]) {
       editor = null;
       renderInvoiceDetail(parts[1]);
-      document.title = 'Factura · Super Mass';
+      document.title = 'Factura · Supermass';
     } else {
       renderInvoices();
     }
@@ -62,7 +62,7 @@ function renderRoute() {
     renderDashboard();
   }
 
-  document.title = `${titles[section] || 'Control de mercancía'} · Super Mass`;
+  document.title = `${titles[section] || 'Control de mercancía'} · Supermass`;
   setActiveNav(section);
   currentHash = hash;
   dirty = false;
@@ -315,8 +315,6 @@ window.addEventListener('beforeunload', event => {
 
 function init() {
   mountIcons();
-  const brand = $('#brand-mark');
-  if (brand) brand.innerHTML = icon('box');
   const scanIcon = $('#top-scan-icon');
   if (scanIcon) scanIcon.innerHTML = icon('scan');
   const scanBtn = $('#top-scan');

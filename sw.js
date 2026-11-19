@@ -1,7 +1,8 @@
-const CACHE = 'supermass-control-v3';
+const CACHE = 'supermass-control-v4';
 const ASSETS = [
   './',
   './index.html',
+  './brand.css',
   './styles.css',
   './views.css',
   './scanner.css',
@@ -16,7 +17,7 @@ const ASSETS = [
   './app.js',
   './vendor/html5-qrcode.min.js',
   './manifest.webmanifest',
-  './icon.svg',
+  './icon.svg'
 ];
 
 self.addEventListener('install', event => {

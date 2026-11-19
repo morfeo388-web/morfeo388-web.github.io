@@ -84,7 +84,7 @@ function renderExpiries() {
     const st = lotStatus(lot);
     const search = [lot.name, lot.barcode, lot.supplier, lot.number, st.label].join(' ');
     return `<div class="expiry-row" data-search="${esc(search)}">
-      <div class="expiry-date ${st.key}"><strong>${lot.expiry ? fmtDate(lot.expiry) : '—'}</strong><span>${st.label}</span></div>
+      <div class="expiry-date ${st.key}"><strong>${lot.expiry ? fmtDateShort(lot.expiry) : '—'}</strong><span>${st.label}</span></div>
       <div class="expiry-info">
         <strong>${esc(lot.name)}</strong>
         <span>${fmtQty(lot.qty)} ${esc(lot.unit)} · ${esc(lot.supplier || 'Sin proveedor')} · Factura ${esc(lot.number || 's/n')}</span>

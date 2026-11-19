@@ -205,7 +205,7 @@ function renderReception(id) {
         <div class="recep-meta">
           ${statusChip(inv.status)}
           <span class="muted">${received ? `Recepción guardada: ${fmtDateTime(inv.receivedAt)}` : 'Aún no guardada'}</span>
-          <span id="rec-dirty" class="${rec.dirty ? 'dirty-flag' : 'saved-flag'}">${rec.dirty ? 'Cambios sin guardar' : (received ? 'Guardado' : (started ? 'Avance guardado' : 'Sin guardar'))}</span>
+          <span id="rec-dirty" class="${rec.dirty ? 'dirty-flag' : (received || started ? 'saved-flag' : 'neutral-flag')}">${rec.dirty ? 'Cambios sin guardar' : (received ? 'Guardado' : (started ? 'Avance guardado' : 'Sin guardar'))}</span>
         </div>
         ${recSummaryHTML()}
         <div class="progress" id="rec-progress"><div style="width:${stats.percent}%"></div></div>

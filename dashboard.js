@@ -18,19 +18,24 @@ function renderDashboard() {
   if (!invoices.length && !lots.length) {
     app.innerHTML = `
       <section class="hero">
-        <div class="hero-icon">${icon('box', 'icon huge')}</div>
-        <h1>Tu control de mercancía, en orden</h1>
-        <p>Escanea la factura, recibe la mercancía y revisa caducidades de perecederos desde un solo lugar. También puedes corregir cualquier dato cuando lo necesites.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#/factura/nuevo">${icon('plus')} Nueva factura</a>
-          <button class="btn secondary" type="button" data-action="start-scan">${icon('scan')} Escanear</button>
-          <button class="btn ghost" type="button" data-action="load-demo">Ver ejemplo</button>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="hero-kicker">Más barato para tu hogar</span>
+            <h1>Tu control de mercancía, en orden</h1>
+            <p>Escanea la factura, recibe la mercancía y revisa caducidades de perecederos desde un solo lugar. También puedes corregir cualquier dato cuando lo necesites.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#/factura/nuevo">${icon('plus')} Nueva factura</a>
+              <button class="btn secondary" type="button" data-action="start-scan">${icon('scan')} Escanear</button>
+              <button class="btn ghost" type="button" data-action="load-demo">Ver ejemplo</button>
+            </div>
+            <ol class="steps">
+              <li><b>1</b><span><strong>Captura o escanea la factura.</strong> Registra proveedor, número y los artículos que deben llegar.</span></li>
+              <li><b>2</b><span><strong>Recibe y verifica.</strong> Marca lo que realmente llegó, anota faltantes y captura la caducidad de perecederos.</span></li>
+              <li><b>3</b><span><strong>Revisa y corrige.</strong> Consulta vencimientos y edita cualquier dato mal capturado.</span></li>
+            </ol>
+          </div>
+          <div class="hero-art" aria-hidden="true"><div class="massito"></div></div>
         </div>
-        <ol class="steps">
-          <li><b>1</b><span><strong>Captura o escanea la factura.</strong> Registra proveedor, número y los artículos que deben llegar.</span></li>
-          <li><b>2</b><span><strong>Recibe y verifica.</strong> Marca lo que realmente llegó, anota faltantes y captura la caducidad de perecederos.</span></li>
-          <li><b>3</b><span><strong>Revisa y corrige.</strong> Consulta vencimientos y edita cualquier dato mal capturado.</span></li>
-        </ol>
       </section>`;
     return;
   }
@@ -42,6 +47,13 @@ function renderDashboard() {
   ].filter(Boolean).join('');
 
   const recent = [...invoices].sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt)).slice(0, 5);
+  const tipText = expired.length
+    ? 'Empieza por lo vencido: retira esos artículos y ajusta el inventario.'
+    : diffs.length
+      ? 'Hay recepciones con diferencias. Revisa faltantes o sobrantes.'
+      : soon.length
+        ? 'Tienes productos por vencer. Planea su rotación para no perderlos.'
+        : 'Todo al día. Revisa las próximas caducidades para planear tu rotación.';
   const recentHtml = recent.length ? recent.map(inv => {
     const info = countedInfo(inv);
     return `<a class="invoice-card" href="#/factura/${inv.id}">
@@ -61,7 +73,7 @@ function renderDashboard() {
   const upcomingHtml = upcoming.length ? upcoming.map(lot => {
     const st = lotStatus(lot);
     return `<a class="expiry-row" href="#/caducidades">
-      <div class="expiry-date ${st.key}"><strong>${fmtDate(lot.expiry)}</strong><span>${st.label}</span></div>
+      <div class="expiry-date ${st.key}"><strong>${fmtDateShort(lot.expiry)}</strong><span>${st.label}</span></div>
       <div class="expiry-info">
         <strong>${esc(lot.name)}</strong>
         <span>${fmtQty(lot.qty)} ${esc(lot.unit)} · ${esc(lot.supplier || 'Sin proveedor')} · Factura ${esc(lot.number || 's/n')}</span>
@@ -79,6 +91,11 @@ function renderDashboard() {
         <a class="btn primary small" href="#/factura/nuevo">${icon('plus')} Nueva factura</a>
         <a class="btn ghost small" href="#/recepciones">${icon('box')} Recibir</a>
       </div>
+    </div>
+
+    <div class="massito-tip">
+      <span class="massito-avatar" role="img" aria-label="Massito"></span>
+      <div><strong>Massito te sugiere</strong><small>${esc(tipText)}</small></div>
     </div>
 
     <section class="stats">

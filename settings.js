@@ -67,7 +67,14 @@ function renderSettings() {
 
       <section class="card">
         <h2>Acerca de</h2>
-        <p class="hint">Super Mass · Control de mercancía · versión ${APP_VERSION}.<br>Escaneo con la cámara del dispositivo, recepción con diferencias, caducidades de perecederos y corrección de datos. Hecha para trabajar sin conexión una vez cargada; el respaldo es tu copia de seguridad.</p>
+        <div class="about-brand">
+          <div class="logo-full" role="img" aria-label="Logotipo de Supermass"></div>
+          <div class="about-copy">
+            <strong>Supermass · Control de mercancía</strong>
+            <span>Más barato para tu hogar · versión ${APP_VERSION}</span>
+          </div>
+        </div>
+        <p class="hint">Escaneo con la cámara del dispositivo, recepción con diferencias, caducidades de perecederos y corrección de datos. Hecha para trabajar sin conexión una vez cargada; el respaldo es tu copia de seguridad.</p>
       </section>
     </div>`;
 }
