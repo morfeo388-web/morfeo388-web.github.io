@@ -1,4 +1,4 @@
-const CACHE = 'supermass-control-v5';
+const CACHE = 'supermass-control-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -22,7 +22,9 @@ const ASSETS = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then(cache => cache.addAll(ASSETS.map(url => new Request(url, { cache: 'reload' }))))
+      .then(() => self.skipWaiting())
   );
 });
 
