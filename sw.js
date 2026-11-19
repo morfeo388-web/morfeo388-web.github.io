@@ -1,4 +1,4 @@
-const CACHE = 'supermass-control-v7';
+const CACHE = 'supermass-control-v8';
 const ASSETS = [
   './',
   './index.html',
